@@ -1,0 +1,4 @@
+SELECT screen_name, count(screen_name) AS name_count 
+FROM allcrypto 
+GROUP BY screen_name 
+SORT BY name_count DESC;
