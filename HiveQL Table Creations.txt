@@ -1,0 +1,28 @@
+1.I cleaned the dataset and converted it into .dat file
+
+2.In hdfs i created a folder CryptoProj put the Cryptocurrency.dat file in hdfs:
+
+[training@localhost Downloads]$ hdfs dfs -put Cryptocurrency.dat /CryptoProj
+
+3. Created this table on hue:
+
+CREATE TABLE allcrypto
+ (id SMALLINT,
+ text STRING,
+ favorited BOOLEAN,
+ favorite_count SMALLINT,
+ reply_TO_SN STRING,
+ created STRING,
+ truncated BOOLEAN,
+ status_source STRING,
+ screen_name STRING,
+ retweet_count SMALLINT,
+ is_retweet BOOLEAN,
+ retweeted BOOLEAN)
+ROW FORMAT DELIMITED
+ FIELDS TERMINATED BY '\t'
+ STORED AS TEXTFILE
+
+4. Then loaded the dataset into Hive:
+ 
+load data inpath '/CryptoProj/Cryptocurrency.dat' OVERWRITE into table allcrypto;

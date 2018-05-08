@@ -1,0 +1,45 @@
+---
+title: "Big Data"
+output: html_document
+---
+```{r}
+
+library(twitteR)
+library(RCurl)
+library(RJSONIO)
+library(stringr)
+```
+```{r}
+api_key <- "aTcEtlBwIPCfv9qsMK2Lxfw" # From dev.twitter.com
+api_secret <- "54MhNRrGTWvrRvQbGHYnrJkJjrlJbKz1MKOyQVZnCKuYv1wxa" # From dev.twitter.com
+token <- "977598208519139329uH5GJqac7ld5cVW9uJcDKiYSNnBmris" 
+# From dev.twitt54MhNRrGTWvrRQvQbGHYnrJkJjrlJbKz1MKOyQVZnCKuYv1wxaer.com
+token_secret <- "O7dUADabDweW6KYxnI1QBkGKgHKzrH6cziB76GFSowR" # From dev.twitter.com
+
+# Create Twitter Connection
+setup_twitter_oauth(api_key, api_secret, token, token_secret)
+```
+
+
+
+```{r}
+tweets.df <- twListToDF(tweets)
+```
+```{r}
+# Use the searchTwitter function to only get tweets for Litecoin cryptocurrency within 1500 miles radius
+litecoin <- searchTwitter("#litecoin", n=50000, lang="en", geocode='39.828346,-98.57948,1500mi') #Geocodes covering United States
+litecoin.df <- twListToDF(litecoin)
+# Manually change the #'s to get records of various cryptocurrencies such as Etharium, Bitcoin, Ripple etc. 
+```
+
+```{r}
+
+View(litecoin.df)
+```
+
+```{r}
+write.csv(litecoin.df, "Lite.csv")
+#Made several such files and combined them into Cryptocurrency.csv
+
+```
+
